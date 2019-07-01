@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <transition @enter="enter" @leave="leave" :css="false">
+    	<img alt="Vue logo" src="./assets/logo.png" v-if="show">
+    </transition>
+    <HelloWorld msg="Welcome to Your Vue.js App" v-if="show"/>
+    <button @click="show = !show">Toggle Content</button> 
   </div>
 </template>
 
@@ -10,8 +13,23 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
+  data() {
+  	return {
+  		show: false,
+  	}
+  },
   components: {
     HelloWorld
+  },
+  methods: {
+  	enter(el, done) {
+  		console.log("enter hello world called", el)
+  		TweenMax.from(el, 1, { opacity: 0, onComplete: done })
+  	},
+  	leave(el, done) {
+  		console.log("leave hello world called", el)
+  		TweenMax.to(el, 1, { opacity: 0, onComplete: done })
+  	},
   }
 }
 </script>
