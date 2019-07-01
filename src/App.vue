@@ -24,11 +24,11 @@ export default {
   methods: {
   	enter(el, done) {
   		console.log("enter hello world called", el)
-  		TweenMax.from(el, 1, { opacity: 0, onComplete: done })
+  		TweenMax.from(el, 2, { opacity: 0, xPercent: 100, onComplete: done })
   	},
   	leave(el, done) {
   		console.log("leave hello world called", el)
-  		TweenMax.to(el, 1, { opacity: 0, onComplete: done })
+  		TweenMax.to(el, 2, { opacity: 0, xPercent: 100, onComplete: done })
   	},
   }
 }
